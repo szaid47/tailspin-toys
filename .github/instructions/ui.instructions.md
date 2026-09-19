@@ -20,6 +20,13 @@ Refer to technology-specific instruction files:
 
 ## Core Principles
 
+### Comments and Documentation
+
+- Comment intent, rationale, and non-obvious decisions — not mechanics that are already clear from the code.
+- Prefer documentation next to the API it describes. Keep comments concise, specific, and current.
+- Treat stale comments as bugs: update or remove them whenever the related code changes.
+- Use TSDoc/JSDoc for exported TypeScript functions and document component `Props` interfaces so callers can understand the contract without reading the implementation.
+
 ### Testability
 
 - Every interactive element MUST include a `data-testid` attribute
@@ -49,7 +56,7 @@ Refer to technology-specific instruction files:
 - Create reusable components for common UI patterns
 - Keep components focused on a single responsibility
 - Use props for configuration, not duplication
-- Document component APIs with TypeScript types
+- Document component APIs with a typed `Props` interface and TSDoc comments for each non-obvious prop
 
 ## Development Workflow
 

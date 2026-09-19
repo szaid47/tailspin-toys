@@ -19,7 +19,9 @@ import GameCard from '../components/GameCard.astro';
 import { getDatabase } from '../lib/db';
 import { getAllGames } from '../lib/games';
 
+/** Props for the page layout. */
 interface Props {
+  /** Text rendered in the page title. */
   title: string;
 }
 
@@ -109,13 +111,17 @@ There is no Svelte/React layer. When a page genuinely needs client behaviour, ad
 ## TypeScript
 
 - Use TypeScript for type-safe props
-- Define `Props` interface in frontmatter
+- Define a `Props` interface in the frontmatter of every reusable component and layout
+- Add a concise TSDoc comment to the interface and document each prop whose purpose, accepted values, or default is not obvious from its name and type
 - Type component imports and helper return values
+- Use two-space indentation, single quotes, semicolons, and trailing commas in multiline lists and objects; ESLint enforces the repository's quote convention
 - Run `npx astro sync` to (re)generate route/content types before linting or type-checking
 - `.astro` files are type-checked by `npm run typecheck:astro` (which runs `astro sync` then `astro check`), on the classic `typescript` package. The pure TypeScript in `db/`, `src/lib/`, and `src/types/` is type-checked separately by `npm run typecheck` (the native TS 7 compiler, `tsgo`), which does **not** process `.astro` files.
 
 ## Best Practices
 
+- Comments should explain why a component or block exists, including non-obvious accessibility or rendering decisions; do not restate the markup or expression below the comment
+- Keep component and prop documentation current when the public API changes
 - Keep data fetching in frontmatter (build time); avoid client-side fetching
 - Minimize client-side JavaScript — the default is zero JS shipped
 - Import and use global CSS styles from layouts

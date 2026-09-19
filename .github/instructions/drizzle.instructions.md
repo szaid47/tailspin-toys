@@ -51,6 +51,10 @@ export async function getAllGameIds(db: Database): Promise<number[]> {
 }
 ```
 
+- Every exported function in `db/` and `src/lib/` must have a TSDoc/JSDoc comment immediately above it.
+- Describe the function's purpose, every parameter (including the injectable `db` argument), and its return value. Document thrown errors or important ordering, nullability, and determinism guarantees when they are part of the contract.
+- Document exported interfaces and types when their purpose or fields are not self-evident.
+- Comments explain intent and constraints, not a line-by-line paraphrase of the query or transformation. Update or remove comments when the implementation changes.
 - Always `order by` a stable column (title) so static builds are deterministic.
 - Map raw rows to the app-facing `Game`/`Publisher`/`Category` types in one place; don't leak Drizzle row shapes into components.
 - Keep ordering/lookup logic in `games.ts`, not in pages.
@@ -70,3 +74,9 @@ Node.js 22.13 or later is required because the data layer uses the built-in `nod
 ## Type checking
 
 The data layer (`db/**/*.ts`, `src/lib/*.ts`) is type-checked by `npm run typecheck`, which runs the native **TypeScript 7** compiler (`tsgo`, from `@typescript/native-preview`) against `tsconfig.tsgo.json`. Keep helpers exported with explicit parameter and return types so `tsgo` can verify them. Linting is unaffected — ESLint + `typescript-eslint` still run on the classic `typescript` package.
+
+## TypeScript Style
+
+- Use two-space indentation, single-quoted strings, semicolons, and trailing commas in multiline objects, arrays, and parameter lists.
+- Keep one statement per line and prefer explicit parameter and return types for exported functions.
+- ESLint enforces the string-quote convention; run `npm run lint` before committing to catch formatting and code-quality regressions.
